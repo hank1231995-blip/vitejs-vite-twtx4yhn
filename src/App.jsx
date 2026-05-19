@@ -14,10 +14,9 @@ import {
 
 // ==========================================
 // 🌟 【上架部署替換區】 🌟
-// 當您要將系統部署到自己主機或 GitHub Pages 時，請將下方的 YOUR_FIREBASE_CONFIG
-// 替換成您自己 Firebase Console 中的專案設定值即可。系統會自動連線！
+// ⚠️ 注意：請「只替換引號裡面的字」，千萬不要刪除或覆蓋到左邊的變數名稱！
 // ==========================================
-const firebaseConfig = {
+const myFirebaseConfig = {
   apiKey: "AIzaSyBkhObzrJSWVoL9nSpc5hYF8YdCPM2R7lk",
   authDomain: "seafa-efaba.firebaseapp.com",
   projectId: "seafa-efaba",
@@ -27,9 +26,10 @@ const firebaseConfig = {
   measurementId: "G-BQT4LMNT5Y"
 };
 
+// --- 系統自動判斷環境與防呆檢查 (絕對不要動這裡的程式碼喔) ---
 const isPreviewEnv = typeof __firebase_config !== 'undefined';
-const finalFirebaseConfig = isPreviewEnv ? JSON.parse(__firebase_config) : YOUR_FIREBASE_CONFIG;
-const isConfigMissing = !isPreviewEnv && (!finalFirebaseConfig.apiKey || finalFirebaseConfig.apiKey === "YOUR_API_KEY");
+const finalFirebaseConfig = isPreviewEnv ? JSON.parse(__firebase_config) : myFirebaseConfig;
+const isConfigMissing = !isPreviewEnv && (!finalFirebaseConfig.apiKey || finalFirebaseConfig.apiKey === "請貼上您的_apiKey");
 
 let app, auth, db;
 if (!isConfigMissing) {
@@ -170,11 +170,10 @@ export default function App() {
           <AlertCircle size={64} className="text-orange-500 mx-auto mb-6 animate-pulse relative z-10" />
           <h1 className="text-2xl font-black text-indigo-900 mb-4 relative z-10 tracking-widest">部署準備就緒！</h1>
           <p className="text-indigo-900/70 font-bold leading-relaxed mb-3 relative z-10 text-lg">
-            系統偵測到您目前正在外部環境，但尚未替換 <br/> 
-            <span className="inline-block mt-2 bg-slate-100 text-rose-500 px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm text-sm tracking-widest">YOUR_FIREBASE_CONFIG</span>
+            系統偵測到您目前正在外部環境，但尚未填寫 Firebase 金鑰。<br/>
           </p>
           <p className="text-sm text-indigo-900/50 font-bold leading-relaxed mb-6 relative z-10">
-            請回到程式碼 <code>App.jsx</code> (約第 18 行)，將您在 Firebase Console 取得的真實設定檔貼上並重新打包，就可以開始運作囉！
+            請回到程式碼 <code>App.jsx</code> (約第 18 行) 的 <code>myFirebaseConfig</code> 區塊，將裡面引號的值換成真實金鑰並儲存，就可以開始運作囉！
           </p>
         </div>
       </div>
