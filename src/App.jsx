@@ -27,7 +27,6 @@ const firebaseConfig = {
   measurementId: "G-BQT4LMNT5Y"
 };
 
-// --- 系統自動判斷環境與防呆檢查 (不需更動) ---
 const isPreviewEnv = typeof __firebase_config !== 'undefined';
 const finalFirebaseConfig = isPreviewEnv ? JSON.parse(__firebase_config) : YOUR_FIREBASE_CONFIG;
 const isConfigMissing = !isPreviewEnv && (!finalFirebaseConfig.apiKey || finalFirebaseConfig.apiKey === "YOUR_API_KEY");
